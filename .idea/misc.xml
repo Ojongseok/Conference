@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/background_rec_4dp.xml" value="0.1015" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/background_verify_left_bottom_8dp.xml" value="0.1015" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/background_verify_right_bottom_8dp.xml" value="0.1015" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/rec_rad_8dp_tv.xml" value="0.1015" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/ripple_event.xml" value="0.1015" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_google_login.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_program_detail.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/dialog_sejong_verify.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_career.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_chat.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_counsel.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_employ.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_learn.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_major.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_mentality.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_mypage.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_program_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/menu/menu_option.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/menu/nav_menu.xml" value="0.2101851851851852" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

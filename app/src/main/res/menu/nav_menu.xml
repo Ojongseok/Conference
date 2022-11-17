@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_item1"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/sample_image"
+        android:title="프로그램"
+        android:visible="true" />
+    <item
+        android:id="@+id/nav_item2"
+        android:enabled="true"
+        android:icon="@drawable/sample_image"
+        android:title="채팅(?)"
+        android:visible="true" />
+    <item
+        android:id="@+id/nav_item3"
+        android:enabled="true"
+        android:icon="@drawable/sample_image"
+        android:title="내 정보" />
+</menu>
