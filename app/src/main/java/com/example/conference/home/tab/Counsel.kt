@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.conference.databinding.*
+import com.example.conference.databinding.FragmentCareerBinding
+import com.example.conference.databinding.FragmentCounselBinding
+import com.example.conference.databinding.FragmentLearnBinding
 import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
@@ -45,25 +47,28 @@ class Counsel : Fragment() {
                             pageAdapter = PageNumberAdapter(requireContext(), pageNumber)
                             adapter = pageAdapter
                         }
-//                        pageAdapter?.setItemClickListener(object : PageNumberAdapter.OnItemClickListener {
-//                            override fun onClick(v: View, position: Int) {
-//                                // 클릭 시 이벤트 작성
-//                                CoroutineScope(Dispatchers.Default).async {
-//                                    initList(position+1)
-//                                }
-//                            }
-//                        })
                         binding.programListPb.visibility = View.GONE
 
+                        pageAdapter?.setItemClickListener(object : PageNumberAdapter.OnItemClickListener {
+                            override fun onClick(v: View, position: Int) {
+                                // 클릭 시 이벤트 작성
+                                CoroutineScope(Dispatchers.Default).async {
+                                    initList(position+1)
+                                    withContext(Dispatchers.Main) {
+                                        binding.programRv.apply {
+                                            layoutManager = LinearLayoutManager(requireContext())
+                                            programListAdapter = ProgramListAdapter(requireContext(), programList)
+                                            adapter = programListAdapter
+                                        }
+                                    }
+                                }
+                            }
+                        })
                     }
                 }
             }
         }
         return binding.root
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
     fun initList(page : Int) {
         val url = "https://do.sejong.ac.kr/ko/program/counsel/list/all/${page}"

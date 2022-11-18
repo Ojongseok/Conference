@@ -47,16 +47,23 @@ class Learn : Fragment() {
                             pageAdapter = PageNumberAdapter(requireContext(), pageNumber)
                             adapter = pageAdapter
                         }
-//                        pageAdapter?.setItemClickListener(object : PageNumberAdapter.OnItemClickListener {
-//                            override fun onClick(v: View, position: Int) {
-//                                // 클릭 시 이벤트 작성
-//                                CoroutineScope(Dispatchers.Default).async {
-//                                    initList(position+1)
-//                                }
-//                            }
-//                        })
                         binding.programListPb.visibility = View.GONE
 
+                        pageAdapter?.setItemClickListener(object : PageNumberAdapter.OnItemClickListener {
+                            override fun onClick(v: View, position: Int) {
+                                // 클릭 시 이벤트 작성
+                                CoroutineScope(Dispatchers.Default).async {
+                                    initList(position+1)
+                                    withContext(Dispatchers.Main) {
+                                        binding.programRv.apply {
+                                            layoutManager = LinearLayoutManager(requireContext())
+                                            programListAdapter = ProgramListAdapter(requireContext(), programList)
+                                            adapter = programListAdapter
+                                        }
+                                    }
+                                }
+                            }
+                        })
                     }
                 }
             }
@@ -65,6 +72,7 @@ class Learn : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
     }
     fun initList(page : Int) {
