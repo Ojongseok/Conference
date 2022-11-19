@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.conference.R
@@ -28,7 +29,10 @@ class PageNumberAdapter(val context: Context, val pageNumber : Elements) : Recyc
 
         view.item_page_number_tv.text = (position+1).toString()
         view.page_number_layout.setOnClickListener {
-            view.item_page_number_tv.setTypeface(view.item_page_number_tv.typeface,Typeface.BOLD)
+            view.item_page_number_tv.apply {
+                setTypeface(view.item_page_number_tv.typeface,Typeface.BOLD)
+                setTextColor(ContextCompat.getColor(context,R.color.main_blue))
+            }
             itemClickListener.onClick(it, position)
         }
     }

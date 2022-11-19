@@ -4,18 +4,18 @@
         android:id="@+id/nav_item1"
         android:checked="true"
         android:enabled="true"
-        android:icon="@drawable/sample_image"
+        android:icon="@drawable/ic_menu_home"
         android:title="프로그램"
         android:visible="true" />
     <item
         android:id="@+id/nav_item2"
         android:enabled="true"
-        android:icon="@drawable/sample_image"
+        android:icon="@drawable/ic_menu_chat"
         android:title="채팅(?)"
         android:visible="true" />
     <item
         android:id="@+id/nav_item3"
         android:enabled="true"
-        android:icon="@drawable/sample_image"
+        android:icon="@drawable/ic_menu_mypage"
         android:title="내 정보" />
 </menu>

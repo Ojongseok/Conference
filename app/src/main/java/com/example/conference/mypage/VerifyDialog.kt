@@ -6,10 +6,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.example.conference.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.dialog_sejong_verify.*
 import org.jsoup.Connection
 import org.jsoup.Jsoup
@@ -17,6 +20,8 @@ import org.jsoup.Jsoup
 class VerifyDialog(val context : Context) {
     private val dialog = Dialog(context)
     val userAgent = R.string.clawling_userAgent.toString()
+    val user = FirebaseAuth.getInstance()
+    val db = FirebaseFirestore.getInstance()
 
     fun showDialog() {
         dialog.setContentView(R.layout.dialog_sejong_verify)
@@ -33,7 +38,6 @@ class VerifyDialog(val context : Context) {
             dialog.dismiss()
         }
     }
-
     private fun sejongVerify() {
         val data = HashMap<String,String>()
         data["userId"] = dialog.login_input_std_id.text.toString()
@@ -58,15 +62,27 @@ class VerifyDialog(val context : Context) {
                 Handler(Looper.getMainLooper()).postDelayed(Runnable {
                     dialog.dismiss()
                     Toast.makeText(context,"교내 학생 인증에 성공했습니다.",Toast.LENGTH_SHORT).show()
+
                 },0)
             } else {
                 Handler(Looper.getMainLooper()).postDelayed(Runnable {
+                    dialog.dismiss()
                     Toast.makeText(context,"교내 학생 인증에 실패했습니다.",Toast.LENGTH_SHORT).show()
                 },0)
             }
         }.start()
     }
     private fun registerUserInfo() {
-        TODO("Not yet implemented")
+        val data = hashMapOf(
+            "uid" to user.uid.toString(),
+            "email" to user.currentUser?.email
+        )
+        db.collection("user").document(user.currentUser?.uid!!).set(data)
+            .addOnSuccessListener {
+                Log.d("TAG","유저정보 등록 성공")
+            }
+            .addOnFailureListener {
+                Log.d("TAG","유저정보 등록 실패")
+            }
     }
 }

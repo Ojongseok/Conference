@@ -173,6 +173,16 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/pd_comment_write_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pd_line_2"
+                android:layout_alignParentEnd="true"
+                android:text="댓글 작성"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pd_comment_rv"
                 android:layout_width="match_parent"
@@ -191,27 +201,5 @@
         android:layout_centerInParent="true"
         android:indeterminateTint="@color/main_blue"
         android:visibility="visible" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/pd_comment_write_btn"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/main_blue"
-        android:clickable="true"
-        app:cardCornerRadius="45dp"
-        app:cardElevation="0dp"
-        app:rippleColor="@color/white">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_comment" />
-    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

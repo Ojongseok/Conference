@@ -22,14 +22,33 @@ class MypageFragment : Fragment() {
 
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.userEmailTv.text = user?.currentUser?.email
+        initData()
+
         binding.userVerifyBtn.setOnClickListener {
             val dialog = VerifyDialog(requireContext())
             dialog.showDialog()
         }
+    }
+
+    private fun initData() {
+        checkVerify()
+        binding.userEmailTv.text = user?.currentUser?.email
+    }
+    private fun checkVerify()  {
+        db.collection("user").document(user.currentUser?.uid!!).get()
+            .addOnCompleteListener {
+                binding.userVerifyBtn.apply {
+                    text = "회원 인증 완료"
+                    isClickable = false
+                }
+                binding.mypagePb.visibility = View.GONE
+            }
+            .addOnFailureListener {
+                binding.userVerifyBtn.text = "회원 인증"
+                binding.mypagePb.visibility = View.GONE
+            }
     }
 }
