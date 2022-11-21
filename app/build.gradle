@@ -64,7 +64,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
+    //swupeRefresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 
     implementation 'androidx.core:core-ktx:1.7.0'

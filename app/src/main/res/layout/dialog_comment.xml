@@ -20,7 +20,7 @@
     <EditText
         android:id="@+id/comment_contents_tv"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="100dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_rec_8dp_stroke"
         android:ems="10"
@@ -53,8 +53,8 @@
 
     <ImageView
         android:id="@+id/comment_close_btn"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"

@@ -6,31 +6,30 @@
     android:layout_height="wrap_content"
     android:padding="2dp">
 
-    <ImageView
-        android:id="@+id/pd_comment_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/sample_image" />
-
     <TextView
         android:id="@+id/pd_comment_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/pd_comment_iv"
-        android:layout_alignBottom="@id/pd_comment_iv"
         android:layout_marginLeft="4dp"
-        android:layout_toRightOf="@id/pd_comment_iv"
         android:gravity="center"
         android:text="Loading..."
         android:textSize="14sp"
         android:textStyle="bold" />
 
+    <ImageView
+        android:id="@+id/pd_comment_chat_btn"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/pd_comment_nickname"
+        android:layout_alignBottom="@id/pd_comment_nickname"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/pd_comment_nickname"
+        app:srcCompat="@drawable/ic_comment" />
+
     <TextView
         android:id="@+id/pd_comment_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/pd_comment_iv"
-        android:layout_alignBottom="@id/pd_comment_iv"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="8dp"
         android:gravity="center"
@@ -41,7 +40,8 @@
         android:id="@+id/pd_comment_contents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pd_comment_iv"
+        android:layout_below="@id/pd_comment_nickname"
+        android:layout_alignStart="@id/pd_comment_nickname"
         android:layout_marginTop="4dp"
         android:text="Loading..."
         android:textSize="14sp" />

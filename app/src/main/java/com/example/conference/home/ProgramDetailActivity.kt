@@ -4,16 +4,20 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.conference.databinding.ActivityProgramDetailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_program_detail.*
 import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+
 
 class ProgramDetailActivity : AppCompatActivity() {
     private var _Binding: ActivityProgramDetailBinding? = null
@@ -44,7 +48,18 @@ class ProgramDetailActivity : AppCompatActivity() {
                 viewSetting(doc, imageUrl)
             }
         }
+        swipeRefresh()
     }
+    private fun swipeRefresh() {
+        binding.refreshLayout.setOnRefreshListener {
+            Handler().postDelayed(1000) {
+                commentAdapter.notifyDataSetChanged()
+                binding.programCommentTv.text = "댓글 " + commentAdapter.itemCount.toString() + "개"
+                refreshLayout.isRefreshing = false
+            }
+        }
+    }
+
     private fun viewSetting(doc: Document, imageUrl: String) {
         Glide.with(applicationContext).load(imageUrl).into(binding.programDetailMainIv)
         binding.programDetailFromTv.text =

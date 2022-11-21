@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.example.conference.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.dialog_comment.*
 
 class WriteCommentDialog(val context: Context, val programKey : String) {
@@ -26,6 +27,7 @@ class WriteCommentDialog(val context: Context, val programKey : String) {
                 commentList.uid = user?.currentUser?.uid!!
                 commentList.comment = dialog.comment_contents_tv.text.toString()
                 commentList.timestamp = System.currentTimeMillis()
+                commentList.email = user?.currentUser?.email!!
 
                 updateComment(programKey,commentList)
             } else {
@@ -38,7 +40,9 @@ class WriteCommentDialog(val context: Context, val programKey : String) {
         }
     }
     private fun updateComment(programKey: String, commentList: ProgramCommentDTO) {
-        db?.collection("program")?.document(programKey)?.set(commentList)
+        db?.collection("program")?.document(programKey)
+            .collection("comment").document()
+            ?.set(commentList)
             ?.addOnSuccessListener {
                 Toast.makeText(context,"댓글을 작성했습니다.",Toast.LENGTH_SHORT).show()
             }?.addOnFailureListener {

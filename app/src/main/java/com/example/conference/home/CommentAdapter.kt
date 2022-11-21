@@ -17,13 +17,14 @@ class CommentAdapter(val context: Context, val programKey :String) : RecyclerVie
     var commentList = ArrayList<ProgramCommentDTO>()
     init {
         db = FirebaseFirestore.getInstance()
-        db?.collection("program")?.document(programKey)?.get()
+        db?.collection("program")?.document(programKey)
+            ?.collection("comment")?.get()
             ?.addOnCompleteListener {
                 if (it.isSuccessful) {
-                    val commentDTO =it.result.toObject(ProgramCommentDTO::class.java)
+                    val commentDTO =it.result.toObjects(ProgramCommentDTO::class.java)
                     if (commentDTO != null) {
-                        db?.collection("program")?.orderBy("timestamp")
-                            ?.addSnapshotListener { value, error ->
+                        db?.collection("program")?.document(programKey)
+                            ?.collection("comment")?.orderBy("timestamp")?.addSnapshotListener { value, error ->
                                 if (value==null) return@addSnapshotListener
                                 commentList.clear()
                                 for (snapshot in value.documents) {
@@ -49,6 +50,7 @@ class CommentAdapter(val context: Context, val programKey :String) : RecyclerVie
         val commentUid = commentList[position].uid
         view.pd_comment_contents.text = commentList[position].comment
         view.pd_comment_timestamp.text = SimpleDateFormat("yyyy-MM-dd hh:mm").format(commentList[position].timestamp)
+        view.pd_comment_nickname.text = commentList[position].email
 //        db?.collection("user")?.document(commentUid!!)?.get()
 //            ?.addOnCompleteListener {
 //                view.pd_comment_nickname.text = it.result.get("nickname").toString()
