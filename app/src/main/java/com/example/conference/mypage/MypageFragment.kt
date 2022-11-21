@@ -14,14 +14,19 @@ class MypageFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var user : FirebaseAuth
     private lateinit var db : FirebaseFirestore
+    var verifyState : Boolean = false
+    init {
+        user = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+        checkVerify()
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
 
-        user = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
 
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -34,7 +39,6 @@ class MypageFragment : Fragment() {
     }
 
     private fun initData() {
-        checkVerify()
         binding.userEmailTv.text = user?.currentUser?.email
     }
     private fun checkVerify()  {

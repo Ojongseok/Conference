@@ -169,6 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pd_line_2"
+                android:layout_marginBottom="4dp"
                 android:text="댓글"
                 android:textSize="14sp"
                 android:textStyle="bold" />

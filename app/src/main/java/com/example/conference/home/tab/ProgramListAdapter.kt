@@ -2,6 +2,7 @@ package com.example.conference.home.tab
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,10 @@ class ProgramListAdapter(val context: Context, val programList : Elements) : Rec
         view.program_list_title_tv.text = programList.select("li")[position].select("b.title")[0].text()
         view.program_list_time_1.text = programList.select("li")[position].select("small")[2].text()
         view.program_list_time_2.text = programList.select("li")[position].select("small")[3].text()
+        val dday1 = programList.select("li")[position].select("label")[0].text().toString()
+        val dday2 =  dday1.replace("m","\nM")
+        view.program_list_dday_tv.text = dday2
+
         Glide.with(context)
             .load(url + programList.select("li div.cover")[position].attr("style")
                 .replace("background-image:url(","")
