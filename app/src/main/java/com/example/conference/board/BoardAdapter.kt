@@ -1,6 +1,7 @@
 package com.example.conference.board
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import java.text.SimpleDateFormat
 class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var db: FirebaseFirestore? = null
     var user : FirebaseAuth? = null
+    var postId  = ArrayList<String>()
     private val postList = ArrayList<BoardListDTO>()
     init {
         db = FirebaseFirestore.getInstance()
@@ -29,6 +31,7 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
             for (snapshot in value.documents) {
                 val post = snapshot.toObject(BoardListDTO::class.java)
                 postList.add(post!!)
+                postId.add(snapshot.id)
             }
             notifyDataSetChanged()
         }
@@ -46,7 +49,11 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
         view.post_list_time_tv.text = SimpleDateFormat("yyyy-MM-dd hh:mm").format(postList[position].timestamp)
         view.post_list_contents_tv.text = postList[position].contents
 
-
+        view.post_list_layout.setOnClickListener {
+            val intent = Intent(context,PostDetailActivity::class.java)
+            intent.putExtra("postId",postId[position])
+            context.startActivity(intent)
+        }
     }
     inner class CustomViewHolder(var view : View) : RecyclerView.ViewHolder(view)
     override fun getItemCount() = postList.size

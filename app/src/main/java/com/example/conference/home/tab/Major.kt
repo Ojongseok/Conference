@@ -61,6 +61,7 @@ class Major : Fragment() {
                                             programListAdapter = ProgramListAdapter(requireContext(), programList)
                                             adapter = programListAdapter
                                         }
+
                                     }
                                 }
                             }

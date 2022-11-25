@@ -14,8 +14,8 @@
         android:layout_marginLeft="4dp"
         android:gravity="center"
         android:text="Loading..."
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textColor="@color/black1"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/pd_comment_timestamp"
@@ -25,7 +25,8 @@
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:text="Loading..."
-        android:textSize="10sp" />
+        android:textColor="@color/black1"
+        android:textSize="11sp" />
 
     <TextView
         android:id="@+id/pd_comment_contents"
@@ -35,14 +36,17 @@
         android:layout_alignStart="@id/pd_comment_nickname"
         android:layout_marginTop="4dp"
         android:text="Loading..."
+        android:textColor="@color/black1"
         android:textSize="14sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/pd_comment_contents"
+        android:layout_marginLeft="2dp"
         android:layout_marginTop="6dp"
-        android:background="#DDBABA">
+        android:layout_marginRight="2dp"
+        android:background="@color/main_blue">
 
     </FrameLayout>
 </RelativeLayout>
