@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
     android:padding="2dp">
 
     <TextView
@@ -15,16 +16,6 @@
         android:text="Loading..."
         android:textSize="14sp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/pd_comment_chat_btn"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/pd_comment_nickname"
-        android:layout_alignBottom="@id/pd_comment_nickname"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/pd_comment_nickname"
-        app:srcCompat="@drawable/ic_comment" />
 
     <TextView
         android:id="@+id/pd_comment_timestamp"

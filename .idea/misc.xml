@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable-v24/ripple_rec_rad_8dp_grey.xml" value="0.1085" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/background_rec_4dp.xml" value="0.1015" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/background_rec_8dp.xml" value="0.1085" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/background_rec_8dp_stroke.xml" value="0.1" />
@@ -12,12 +13,15 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/rec_rad_8dp_tv.xml" value="0.1015" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/ripple_event.xml" value="0.1015" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/ripple_rec_rad_8dp.xml" value="0.1085" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_google_login.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/ripple_rec_rad_8dp_grey.xml" value="0.1085" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_google_login.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_program_detail.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_splash.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/dialog_comment.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/dialog_post_write.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/dialog_sejong_verify.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_board.xml" value="0.42311033883579496" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_career.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_chat.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_counsel.xml" value="0.25364583333333335" />
@@ -27,8 +31,10 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_major.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_mentality.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_mypage.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_chat_room_list.xml" value="0.536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_page_number.xml" value="0.264" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_program_comment.xml" value="0.8" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_post_list.xml" value="0.536" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_program_comment.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_program_list.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/menu/menu_option.xml" value="0.2101851851851852" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/menu/nav_menu.xml" value="0.2101851851851852" />

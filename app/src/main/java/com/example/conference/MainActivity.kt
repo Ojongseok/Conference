@@ -7,7 +7,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
-import com.example.conference.chat.ChatFragment
+import com.example.conference.board.BoardFragment
 import com.example.conference.databinding.ActivityMainBinding
 import com.example.conference.home.HomeFragment
 import com.example.conference.mypage.MypageFragment
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     return true
                 }
                 R.id.nav_item2 -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.main_container_layout,ChatFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_container_layout,BoardFragment()).commit()
                     return true
                 }
                 R.id.nav_item3 -> {

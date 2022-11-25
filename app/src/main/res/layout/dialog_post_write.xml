@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="360dp"
     android:layout_height="wrap_content"
     android:background="@drawable/background_rec_8dp"
     android:padding="8dp">
@@ -12,16 +12,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="댓글 작성"
+        android:text="게시글 작성"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/comment_contents_tv"
+        android:id="@+id/post_write_contents_tv"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_rec_8dp_stroke"
         android:ems="10"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/comment_write_ok_btn"
+        android:id="@+id/post_write_ok_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -50,10 +50,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comment_contents_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/post_write_contents_tv" />
 
     <ImageView
-        android:id="@+id/comment_close_btn"
+        android:id="@+id/post_close_btn"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"

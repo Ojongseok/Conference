@@ -48,6 +48,8 @@ class ProgramDetailActivity : AppCompatActivity() {
                 viewSetting(doc, imageUrl)
             }
         }
+
+        // 글로벌스코프로 해보면 안팅기나?
         swipeRefresh()
     }
     private fun swipeRefresh() {
@@ -84,9 +86,8 @@ class ProgramDetailActivity : AppCompatActivity() {
         binding.pdCommentRv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = commentAdapter
-        }.handler.postDelayed({
             binding.programCommentTv.text = "댓글 " + commentAdapter.itemCount.toString() + "개"
-        }, 500)
+        }
 
         binding.programDetailPb.visibility = View.INVISIBLE
         binding.programDetailBackBtn.setOnClickListener {

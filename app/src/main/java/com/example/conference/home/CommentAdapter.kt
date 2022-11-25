@@ -37,6 +37,7 @@ class CommentAdapter(val context: Context, val programKey :String) : RecyclerVie
                     }
                 }
             }
+        notifyDataSetChanged()
     }
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_program_comment,viewGroup,false)
@@ -50,12 +51,7 @@ class CommentAdapter(val context: Context, val programKey :String) : RecyclerVie
         val commentUid = commentList[position].uid
         view.pd_comment_contents.text = commentList[position].comment
         view.pd_comment_timestamp.text = SimpleDateFormat("yyyy-MM-dd hh:mm").format(commentList[position].timestamp)
-        view.pd_comment_nickname.text = commentList[position].email
-//        db?.collection("user")?.document(commentUid!!)?.get()
-//            ?.addOnCompleteListener {
-//                view.pd_comment_nickname.text = it.result.get("nickname").toString()
-//                Glide.with(context).load(it.result.get("profileUrl").toString()).into(view.pd_comment_iv)
-//            }
+        view.pd_comment_nickname.text = commentList[position].email.split('@')[0]
     }
     inner class CustomViewHolder(var view : View) : RecyclerView.ViewHolder(view)
     override fun getItemCount() = commentList.size

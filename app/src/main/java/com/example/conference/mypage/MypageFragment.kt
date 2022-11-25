@@ -1,10 +1,15 @@
 package com.example.conference.mypage
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.conference.GoogleLoginActivity
+import com.example.conference.R
 import com.example.conference.databinding.FragmentMypageBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,14 +20,13 @@ class MypageFragment : Fragment() {
     private lateinit var user : FirebaseAuth
     private lateinit var db : FirebaseFirestore
     var verifyState : Boolean = false
-    init {
-        user = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
-        checkVerify()
-    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
 
+        user = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+        checkVerify()
 
         return binding.root
     }
@@ -32,27 +36,35 @@ class MypageFragment : Fragment() {
 
         initData()
 
-        binding.userVerifyBtn.setOnClickListener {
+        binding.mypageVerifyIv.setOnClickListener {
             val dialog = VerifyDialog(requireContext())
             dialog.showDialog()
+        }
+        binding.mypageLogoutBtn.setOnClickListener {
+            Toast.makeText(requireContext(),"로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+            user.signOut()
+            startActivity(Intent(requireContext(),GoogleLoginActivity::class.java))
+            activity?.finish()
         }
     }
 
     private fun initData() {
-        binding.userEmailTv.text = user?.currentUser?.email
+        binding.userEmailTv.text = (user?.currentUser?.email)!!.split('@')[0] + "님 환영합니다 :)"
     }
     private fun checkVerify()  {
         db.collection("user").document(user.currentUser?.uid!!).get()
-            .addOnCompleteListener {
-                binding.userVerifyBtn.apply {
-                    text = "회원 인증 완료"
-                    isClickable = false
+            .addOnSuccessListener {
+                if (it.exists()) {
+                    binding.userVerifyTv.visibility = View.GONE
+                    binding.mypageVerifyIv.setImageResource(R.drawable.ic_verify_on)
+                    binding.mypageVerifyIv.isClickable = false
+                    binding.mypagePb.visibility = View.GONE
+                } else {
+                    binding.userVerifyTv.text = "회원 인증을 진행해주세요."
+                    binding.userVerifyTv.visibility = View.VISIBLE
+                    binding.mypageVerifyIv.setImageResource(R.drawable.ic_verify_off)
+                    binding.mypagePb.visibility = View.GONE
                 }
-                binding.mypagePb.visibility = View.GONE
-            }
-            .addOnFailureListener {
-                binding.userVerifyBtn.text = "회원 인증"
-                binding.mypagePb.visibility = View.GONE
             }
     }
 }
