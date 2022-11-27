@@ -51,7 +51,7 @@ class CommentAdapter(val context: Context, val programKey :String) : RecyclerVie
         val commentUid = commentList[position].uid
         view.pd_comment_contents.text = commentList[position].comment
         view.pd_comment_timestamp.text = SimpleDateFormat("yyyy-MM-dd hh:mm").format(commentList[position].timestamp)
-        view.pd_comment_nickname.text = commentList[position].email.split('@')[0]
+        view.pd_comment_nickname.text = commentList[position].nickname
     }
     inner class CustomViewHolder(var view : View) : RecyclerView.ViewHolder(view)
     override fun getItemCount() = commentList.size

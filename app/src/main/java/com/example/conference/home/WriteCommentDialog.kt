@@ -31,7 +31,7 @@ class WriteCommentDialog(val context: Context, val programKey : String) {
                 commentList.uid = user.currentUser?.uid!!
                 commentList.comment = dialog.comment_contents_tv.text.toString()
                 commentList.timestamp = System.currentTimeMillis()
-                commentList.email = user.currentUser?.email!!
+                commentList.nickname = user.currentUser?.email?.split('@')!![0]
 
                 updateComment(programKey,commentList)
             } else {

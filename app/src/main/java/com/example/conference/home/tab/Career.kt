@@ -27,7 +27,7 @@ class Career : Fragment() {
         _binding = FragmentCareerBinding.inflate(inflater, container, false)
 
         CoroutineScope(Dispatchers.Default).launch {
-            val init = CoroutineScope(Dispatchers.Default).async {
+            val init = async {
                 initList(1)
             }
             init.await().apply {

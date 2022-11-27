@@ -13,20 +13,28 @@ import com.example.conference.R
 import com.example.conference.databinding.FragmentMypageBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.*
 
 class MypageFragment : Fragment() {
     private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!!
-    private lateinit var user : FirebaseAuth
-    private lateinit var db : FirebaseFirestore
-    var verifyState : Boolean = false
+    private lateinit var user: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+    var verifyState: Boolean = false
+    var userNickname = ""
+    var myPostCount = 0
+    var myCommentCount = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
 
         user = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
-        checkVerify()
+        userNickname = user.currentUser?.email?.split('@')!![0]
 
         return binding.root
     }
@@ -35,23 +43,55 @@ class MypageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initData()
+        checkVerify()
+        checkPostCount()
+        checkCommentCount()
 
         binding.mypageVerifyIv.setOnClickListener {
             val dialog = VerifyDialog(requireContext())
             dialog.showDialog()
         }
         binding.mypageLogoutBtn.setOnClickListener {
-            Toast.makeText(requireContext(),"로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
             user.signOut()
-            startActivity(Intent(requireContext(),GoogleLoginActivity::class.java))
+            startActivity(Intent(requireContext(), GoogleLoginActivity::class.java))
             activity?.finish()
         }
     }
 
-    private fun initData() {
-        binding.userEmailTv.text = (user?.currentUser?.email)!!.split('@')[0] + "님 환영합니다 :)"
+    private fun checkCommentCount() {
+//        db.collection("program").get().addOnSuccessListener {
+//            for (document in it) {
+//                Log.d("태그",document.data.toString())
+//            }
+//        }
+//            .collection("comment").get().addOnCompleteListener {
+//                for (document in it.result) {
+//                    Log.d("태그",document.toString())
+//                    if (document["nickname"].toString() == userNickname) {
+//                        myCommentCount++
+//                    }
+//                }
+//                binding.mycommentCountTv.text = "$myCommentCount 개"
+//            }
     }
-    private fun checkVerify()  {
+
+    private fun checkPostCount() {
+        db.collection("post").get().addOnCompleteListener {
+            for (document in it.result) {
+                if (document["nickname"].toString() == userNickname) {
+                    myPostCount++
+                }
+            }
+            binding.mypostCountTv.text = "$myPostCount 개"
+        }
+    }
+
+    private fun initData() {
+        binding.userEmailTv.text = userNickname + "님 환영합니다 :)"
+    }
+
+    private fun checkVerify() {
         db.collection("user").document(user.currentUser?.uid!!).get()
             .addOnSuccessListener {
                 if (it.exists()) {
