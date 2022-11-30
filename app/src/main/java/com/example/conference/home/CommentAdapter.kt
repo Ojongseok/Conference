@@ -18,26 +18,15 @@ class CommentAdapter(val context: Context, val programKey :String) : RecyclerVie
     init {
         db = FirebaseFirestore.getInstance()
         db?.collection("program")?.document(programKey)
-            ?.collection("comment")?.get()
-            ?.addOnCompleteListener {
+            ?.collection("comment")?.orderBy("timestamp")?.get()?.addOnCompleteListener {
                 if (it.isSuccessful) {
-                    val commentDTO =it.result.toObjects(ProgramCommentDTO::class.java)
-                    if (commentDTO != null) {
-                        db?.collection("program")?.document(programKey)
-                            ?.collection("comment")?.orderBy("timestamp")?.addSnapshotListener { value, error ->
-                                if (value==null) return@addSnapshotListener
-                                commentList.clear()
-                                for (snapshot in value.documents) {
-                                    commentList.add(snapshot.toObject(ProgramCommentDTO::class.java)!!)
-                                }
-                                notifyDataSetChanged()
-                            }
-                    } else {
-                        Log.d("태그","CommentAdapter 오류")
+                    commentList.clear()
+                    for (i in it.result) {
+                        commentList.add(i.toObject(ProgramCommentDTO::class.java)!!)
                     }
+                    notifyDataSetChanged()
                 }
             }
-        notifyDataSetChanged()
     }
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_program_comment,viewGroup,false)

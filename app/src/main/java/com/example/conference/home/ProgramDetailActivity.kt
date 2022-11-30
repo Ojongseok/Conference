@@ -54,8 +54,9 @@ class ProgramDetailActivity : AppCompatActivity() {
     }
     private fun swipeRefresh() {
         binding.refreshLayout.setOnRefreshListener {
+            commentAdapter = CommentAdapter(this,programKey)
+            binding.pdCommentRv.adapter = commentAdapter
             Handler().postDelayed(1000) {
-                commentAdapter.notifyDataSetChanged()
                 binding.programCommentTv.text = "댓글 " + commentAdapter.itemCount.toString() + "개"
                 refreshLayout.isRefreshing = false
             }

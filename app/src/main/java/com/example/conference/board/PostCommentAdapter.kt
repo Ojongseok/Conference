@@ -22,13 +22,16 @@ class PostCommentAdapter(val context: Context, val postId : String) : RecyclerVi
     init {
         db = FirebaseFirestore.getInstance()
         user = FirebaseAuth.getInstance()
-
+        commentlist.clear()
         db?.collection("post")?.document(postId)
-            ?.collection("comment")?.addSnapshotListener { value, error ->
-                if (value == null) return@addSnapshotListener  // 스냅샷이 살아있는데 다른데서 종료하려하면 자주 튕기니까 항상 달아줌
-                commentlist.clear()
-                for (snapshot in value.documents) {
-                    commentlist.add(snapshot.toObject(ProgramCommentDTO::class.java)!!)
+            ?.collection("comment")?.orderBy("timestamp")?.get()?.addOnCompleteListener {
+                Log.d("태그","123")
+                if (it.isSuccessful) {
+                    commentlist.clear()
+                    for (i in it.result) {
+                        commentlist.add(i.toObject(ProgramCommentDTO::class.java)!!)
+                    }
+                    notifyDataSetChanged()
                 }
             }
     }
@@ -41,8 +44,12 @@ class PostCommentAdapter(val context: Context, val postId : String) : RecyclerVi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val view = (holder as CustomViewHolder).itemView
 
+        view.pd_comment_nickname.text = commentlist[position].nickname
+        view.pd_comment_contents.text = commentlist[position].comment
+        view.pd_comment_timestamp.text = SimpleDateFormat("yyyy-MM-dd hh:mm").format(commentlist[position].timestamp)
+
 
     }
     inner class CustomViewHolder(var view : View) : RecyclerView.ViewHolder(view)
-    override fun getItemCount() = 3
+    override fun getItemCount() = commentlist.size
 }

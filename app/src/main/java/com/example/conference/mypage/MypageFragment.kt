@@ -20,7 +20,6 @@ class MypageFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var user: FirebaseAuth
     private lateinit var db: FirebaseFirestore
-    var verifyState: Boolean = false
     var userNickname = ""
     var myPostCount = 0
     var myCommentCount = 0
@@ -60,20 +59,22 @@ class MypageFragment : Fragment() {
     }
 
     private fun checkCommentCount() {
-//        db.collection("program").get().addOnSuccessListener {
-//            for (document in it) {
-//                Log.d("태그",document.data.toString())
-//            }
-//        }
-//            .collection("comment").get().addOnCompleteListener {
-//                for (document in it.result) {
-//                    Log.d("태그",document.toString())
-//                    if (document["nickname"].toString() == userNickname) {
-//                        myCommentCount++
-//                    }
-//                }
-//                binding.mycommentCountTv.text = "$myCommentCount 개"
-//            }
+        db.collection("post").get().addOnCompleteListener { document ->
+            for (item in document.result) {
+                db.collection("post").document(item.id)
+                    .collection("comment").get().addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            for (doc in it.result) {
+                                if (doc["nickname"].toString() == userNickname) {
+                                    myCommentCount++
+                                    Log.d("태그",myCommentCount.toString())
+                                }
+                            }
+                        }
+                        binding.mycommentCountTv.text = "$myCommentCount 개"
+                    }
+            }
+        }
     }
 
     private fun checkPostCount() {

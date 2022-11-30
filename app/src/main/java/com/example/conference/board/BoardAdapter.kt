@@ -2,17 +2,14 @@ package com.example.conference.board
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.conference.R
-import com.example.conference.home.ProgramCommentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_post_list.view.*
-import kotlinx.android.synthetic.main.item_program_comment.view.*
 import java.text.SimpleDateFormat
 
 
@@ -21,6 +18,7 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
     var user : FirebaseAuth? = null
     var postId  = ArrayList<String>()
     private val postList = ArrayList<BoardListDTO>()
+    private val commentCountList = ArrayList<Int>()
     init {
         db = FirebaseFirestore.getInstance()
         user = FirebaseAuth.getInstance()
@@ -35,6 +33,7 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
             }
             notifyDataSetChanged()
         }
+
     }
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_post_list,viewGroup,false)
@@ -45,6 +44,14 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val view = (holder as CustomViewHolder).itemView
 
+
+        db?.collection("post")?.document(postId[position])
+            ?.collection("comment")?.get()?.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    view.post_list_comment_count_tv.text = it.result.documents.size.toString()
+                }
+            }
+        view.post_list_title_tv.text = postList[position].title
         view.post_list_nickname_tv.text = postList[position].nickname
         view.post_list_time_tv.text = SimpleDateFormat("yyyy-MM-dd hh:mm").format(postList[position].timestamp)
         view.post_list_contents_tv.text = postList[position].contents
@@ -55,6 +62,8 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
             context.startActivity(intent)
         }
     }
+
+
     inner class CustomViewHolder(var view : View) : RecyclerView.ViewHolder(view)
     override fun getItemCount() = postList.size
 }

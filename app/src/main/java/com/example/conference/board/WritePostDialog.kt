@@ -29,16 +29,16 @@ class WritePostDialog(val context: Context) {
         dialog.show()
 
         dialog.post_write_ok_btn.setOnClickListener {
-            if (dialog.post_write_contents_tv.text.isNotEmpty()) {
+            if (dialog.post_write_contents_tv.text.isNotEmpty() && dialog.post_write_title_tv.text.isNotEmpty()) {
                 val postList = BoardListDTO()
                 postList.uid = user?.currentUser?.uid!!
+                postList.title = dialog.post_write_title_tv.text.toString()
                 postList.contents = dialog.post_write_contents_tv.text.toString()
                 postList.timestamp = System.currentTimeMillis()
                 postList.nickname = user?.currentUser?.email!!.split('@')[0]
 
                 updateComment(postList)
             } else {
-                Log.d("태그","1")
                 Toast.makeText(context,"내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
