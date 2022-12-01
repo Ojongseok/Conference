@@ -73,7 +73,7 @@ class Counsel : Fragment() {
     fun initList(page : Int) {
         val url = "https://do.sejong.ac.kr/ko/program/counsel/list/all/${page}"
         val doc = Jsoup.connect(url).get()
-        programList = doc.select("ul.columns-4")
+        programList = doc.select("ul.columns-5")
         pageNumber = doc.select("div.pagination").select("li")
     }
 }

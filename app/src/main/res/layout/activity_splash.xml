@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="160dp"
         android:text="두드림 모바일"
-        android:textColor="#000000"
+        android:textColor="@color/main_blue"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

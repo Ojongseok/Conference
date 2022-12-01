@@ -18,7 +18,6 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
     var user : FirebaseAuth? = null
     var postId  = ArrayList<String>()
     private val postList = ArrayList<BoardListDTO>()
-    private val commentCountList = ArrayList<Int>()
     init {
         db = FirebaseFirestore.getInstance()
         user = FirebaseAuth.getInstance()
@@ -33,7 +32,6 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
             }
             notifyDataSetChanged()
         }
-
     }
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_post_list,viewGroup,false)

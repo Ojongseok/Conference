@@ -25,7 +25,6 @@ class PostCommentAdapter(val context: Context, val postId : String) : RecyclerVi
         commentlist.clear()
         db?.collection("post")?.document(postId)
             ?.collection("comment")?.orderBy("timestamp")?.get()?.addOnCompleteListener {
-                Log.d("태그","123")
                 if (it.isSuccessful) {
                     commentlist.clear()
                     for (i in it.result) {

@@ -87,7 +87,10 @@ class ProgramDetailActivity : AppCompatActivity() {
         binding.pdCommentRv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = commentAdapter
-            binding.programCommentTv.text = "댓글 " + commentAdapter.itemCount.toString() + "개"
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(200)
+                binding.programCommentTv.text = "댓글 " + commentAdapter.itemCount.toString() + "개"
+            }
         }
 
         binding.programDetailPb.visibility = View.INVISIBLE

@@ -55,6 +55,9 @@ class PostDetailActivity : AppCompatActivity() {
             val dialog = PostWriteCommentDialog(this, postId!!)
             dialog.showDialog()
         }
+        binding.postDetailFavoriteBtn.setOnClickListener {
+
+        }
         binding.postDetailBackBtn.setOnClickListener {
             finish()
         }
