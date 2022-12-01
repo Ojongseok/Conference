@@ -38,7 +38,8 @@ class BoardFragment : Fragment() {
     private fun swipeRefresh() {
         binding.refreshLayout.setOnRefreshListener {
             Handler().postDelayed(1000) {
-                postAdapter.notifyDataSetChanged()
+                postAdapter = BoardAdapter(requireContext())
+                binding.boardListRv.adapter = postAdapter
                 refreshLayout.isRefreshing = false
             }
         }

@@ -22,10 +22,9 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
         db = FirebaseFirestore.getInstance()
         user = FirebaseAuth.getInstance()
 
-        db?.collection("post")?.orderBy("timestamp")?.addSnapshotListener { value, error ->
-            if (value == null) return@addSnapshotListener  // 스냅샷이 살아있는데 다른데서 종료하려하면 자주 튕기니까 항상 달아줌
+        db?.collection("post")?.orderBy("timestamp")?.get()?.addOnSuccessListener {
             postList.clear()
-            for (snapshot in value.documents) {
+            for (snapshot in it) {
                 val post = snapshot.toObject(BoardListDTO::class.java)
                 postList.add(post!!)
                 postId.add(snapshot.id)
