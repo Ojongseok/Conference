@@ -7,6 +7,9 @@ import android.util.Log
 import android.view.View
 import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.conference.R
+import com.example.conference.UserInfoDTO
 import com.example.conference.databinding.ActivityPostDetailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -35,19 +38,20 @@ class PostDetailActivity : AppCompatActivity() {
         postCommentAdapter = PostCommentAdapter(applicationContext, postId!!)
 
         CoroutineScope(Dispatchers.Main).launch {
-            val postInfo = async {
+            async {
                 getPostInfo()
             }
-            postInfo.await().apply {
-                binding.postDetailPb.visibility = View.GONE
+            async {
+                getFavoriteState()
             }
-            launch {
+            async {
                 delay(300)
                 binding.postDetailCommentRv.apply {
                     layoutManager = LinearLayoutManager(context)
                     adapter = postCommentAdapter
                     binding.postListCommentCountTv.text = postCommentAdapter.itemCount.toString()
                 }
+                binding.postDetailPb.visibility = View.GONE
             }
         }
 
@@ -56,7 +60,7 @@ class PostDetailActivity : AppCompatActivity() {
             dialog.showDialog()
         }
         binding.postDetailFavoriteBtn.setOnClickListener {
-
+            favoriteEvent()
         }
         binding.postDetailBackBtn.setOnClickListener {
             finish()
@@ -64,6 +68,37 @@ class PostDetailActivity : AppCompatActivity() {
         swipeRefresh()
     }
 
+    private fun getFavoriteState() {
+        db.collection("user").document(user.currentUser?.uid!!).addSnapshotListener { value, error ->
+            if (value == null) return@addSnapshotListener
+            if (value.data != null) {
+                val map = value.data!!["favoritePost"] as HashMap<String, Boolean>
+                if (map[postId] == true) {
+                    if (!this.isFinishing) {
+                        Glide.with(this).load(R.drawable.ic_favorite_on).into(binding.postDetailFavoriteBtn)
+                    }
+                } else {
+                    if (!this.isFinishing) {
+                        Glide.with(this).load(R.drawable.ic_favorite_off).into(binding.postDetailFavoriteBtn)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun favoriteEvent() {
+        val doc = db.collection("user").document(user.currentUser?.uid!!)
+        db.runTransaction {
+            val userInfoDTO = it.get(doc).toObject(UserInfoDTO::class.java)
+            if (userInfoDTO?.favoritePost?.containsKey(postId!!)!!) {
+                userInfoDTO.favoritePost.remove(postId!!)
+            } else {
+                userInfoDTO.favoritePost[postId.toString()] = true
+            }
+            it.set(doc,userInfoDTO)
+            return@runTransaction
+        }
+    }
     fun getPostInfo() {
         db.collection("post").document(postId!!).get().addOnSuccessListener {
             if (it.exists()) {

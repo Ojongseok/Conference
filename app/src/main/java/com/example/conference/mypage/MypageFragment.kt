@@ -24,11 +24,7 @@ class MypageFragment : Fragment() {
     var myPostCount = 0
     var myCommentCount = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
 
         user = FirebaseAuth.getInstance()
@@ -45,6 +41,7 @@ class MypageFragment : Fragment() {
         checkVerify()
         checkPostCount()
         checkCommentCount()
+        checkFavoriteCount()
 
         binding.mypageVerifyIv.setOnClickListener {
             val dialog = VerifyDialog(requireContext())
@@ -58,6 +55,15 @@ class MypageFragment : Fragment() {
         }
     }
 
+    private fun checkFavoriteCount() {
+        db.collection("user").document(user.currentUser?.uid!!).get().addOnSuccessListener {
+            if (it.exists()) {
+                val favoriteCount = it.data?.get("favoritePost") as HashMap<*,*>
+                binding.myfavoriteCountTv.text = favoriteCount.size.toString() + " 개"
+            }
+        }
+    }
+
     private fun checkCommentCount() {
         db.collection("post").get().addOnCompleteListener { document ->
             for (item in document.result) {
@@ -67,7 +73,6 @@ class MypageFragment : Fragment() {
                             for (doc in it.result) {
                                 if (doc["nickname"].toString() == userNickname) {
                                     myCommentCount++
-                                    Log.d("태그",myCommentCount.toString())
                                 }
                             }
                         }
