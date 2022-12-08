@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -26,14 +27,21 @@ class ProgramDetailActivity : AppCompatActivity() {
     var user: FirebaseAuth? = null
     lateinit var programKey: String
     lateinit var commentAdapter : CommentAdapter
-
+    var verifyState = false
+    init {
+        db = FirebaseFirestore.getInstance()
+        user = FirebaseAuth.getInstance()
+        db?.collection("user")?.document(user?.currentUser?.uid!!)?.get()?.addOnSuccessListener {
+            if (it.exists()) {
+                verifyState = true
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _Binding = ActivityProgramDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        db = FirebaseFirestore.getInstance()
-        user = FirebaseAuth.getInstance()
 
         val url = intent.getStringExtra("href").toString()
         programKey = url.substring(46, 50)
@@ -46,9 +54,9 @@ class ProgramDetailActivity : AppCompatActivity() {
                 .replace(");", "")
             withContext(Dispatchers.Main) {
                 viewSetting(doc, imageUrl)
+                binding.programDetailPb.visibility = View.INVISIBLE
             }
         }
-
         // 글로벌스코프로 해보면 안팅기나?
         swipeRefresh()
     }
@@ -57,6 +65,11 @@ class ProgramDetailActivity : AppCompatActivity() {
             commentAdapter = CommentAdapter(this,programKey)
             binding.pdCommentRv.adapter = commentAdapter
             Handler().postDelayed(1000) {
+                if (commentAdapter.itemCount != 0 ) {
+                    binding.postDetailCommentZeroTv2.visibility = View.GONE
+                } else {
+                    binding.postDetailCommentZeroTv2.visibility = View.VISIBLE
+                }
                 binding.programCommentTv.text = "댓글 " + commentAdapter.itemCount.toString() + "개"
                 refreshLayout.isRefreshing = false
             }
@@ -81,19 +94,26 @@ class ProgramDetailActivity : AppCompatActivity() {
         binding.pdContentTv.append("\n" + "현황 : " + doc.select("li.tbody").first().children()[2].text())
 
         binding.pdCommentWriteBtn.setOnClickListener {
-            val writeCommentDialog = WriteCommentDialog(this, programKey)
-            writeCommentDialog.showDialog()
+            if (verifyState) {
+                val writeCommentDialog = WriteCommentDialog(this, programKey)
+                writeCommentDialog.showDialog()
+            } else {
+                Toast.makeText(applicationContext,"교내 학생 인증이 완료된 회원만 댓글 작성이 가능합니다.", Toast.LENGTH_SHORT).show()
+            }
         }
         binding.pdCommentRv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = commentAdapter
             CoroutineScope(Dispatchers.Main).launch {
-                delay(200)
+                delay(300)
                 binding.programCommentTv.text = "댓글 " + commentAdapter.itemCount.toString() + "개"
+                if (commentAdapter.itemCount != 0 ) {
+                    binding.postDetailCommentZeroTv2.visibility = View.GONE
+                } else {
+                    binding.postDetailCommentZeroTv2.visibility = View.VISIBLE
+                }
             }
         }
-
-        binding.programDetailPb.visibility = View.INVISIBLE
         binding.programDetailBackBtn.setOnClickListener {
             finish()
         }

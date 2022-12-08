@@ -18,13 +18,13 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/drawable/ripple_rec_rad_8dp_grey.xml" value="0.1085" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_google_login.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_post_detail.xml" value="0.264" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_program_detail.xml" value="0.536" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_post_detail.xml" value="0.6" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_program_detail.xml" value="0.72" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/activity_splash.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/dialog_comment.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/dialog_post_write.xml" value="0.536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/dialog_sejong_verify.xml" value="0.4" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_board.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_board.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_career.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_chat.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_counsel.xml" value="0.25364583333333335" />
@@ -33,7 +33,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_learn.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_major.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_mentality.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_mypage.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/fragment_mypage.xml" value="0.536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_chat_room_list.xml" value="0.536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_page_number.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Conference/app/src/main/res/layout/item_post_list.xml" value="0.536" />

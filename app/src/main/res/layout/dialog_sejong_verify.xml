@@ -13,7 +13,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="교내 학생 인증"
+        android:textColor="@color/black1"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,6 +74,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginRight="8dp"
         android:text="*세종대학교 대양휴머니티칼리지 기반 교내 학생 인증 로그인이며\n학사정보 시스템 로그인과 동일합니다."
+        android:textColor="@color/black1"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

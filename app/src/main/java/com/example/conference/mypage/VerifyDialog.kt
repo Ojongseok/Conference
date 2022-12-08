@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import com.example.conference.MainActivity
 import com.example.conference.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -62,7 +64,6 @@ class VerifyDialog(val context : Context) {
                 Handler(Looper.getMainLooper()).postDelayed(Runnable {
                     dialog.dismiss()
                     Toast.makeText(context,"교내 학생 인증에 성공했습니다.",Toast.LENGTH_SHORT).show()
-
                 },0)
             } else {
                 Handler(Looper.getMainLooper()).postDelayed(Runnable {
@@ -75,7 +76,7 @@ class VerifyDialog(val context : Context) {
     private fun registerUserInfo() {
         val data = hashMapOf(
             "uid" to user.uid.toString(),
-            "email" to user.currentUser?.email
+            "email" to user.currentUser?.email,
         )
         db.collection("user").document(user.currentUser?.uid!!).set(data)
             .addOnSuccessListener {

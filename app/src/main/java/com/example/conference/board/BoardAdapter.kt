@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.conference.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.item_post_list.view.*
 import java.text.SimpleDateFormat
 
@@ -22,7 +23,7 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
         db = FirebaseFirestore.getInstance()
         user = FirebaseAuth.getInstance()
 
-        db?.collection("post")?.orderBy("timestamp")?.get()?.addOnSuccessListener {
+        db?.collection("post")?.orderBy("timestamp",Query.Direction.DESCENDING)?.get()?.addOnSuccessListener {
             postList.clear()
             for (snapshot in it) {
                 val post = snapshot.toObject(BoardListDTO::class.java)
@@ -52,6 +53,7 @@ class BoardAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vie
         view.post_list_nickname_tv.text = postList[position].nickname
         view.post_list_time_tv.text = SimpleDateFormat("yyyy-MM-dd hh:mm").format(postList[position].timestamp)
         view.post_list_contents_tv.text = postList[position].contents
+        view.post_list_favorite_count_tv.text = postList[position].favoriteCount.toString()
 
         view.post_list_layout.setOnClickListener {
             val intent = Intent(context,PostDetailActivity::class.java)

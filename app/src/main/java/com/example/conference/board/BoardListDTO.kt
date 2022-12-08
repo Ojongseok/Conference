@@ -5,5 +5,6 @@ data class BoardListDTO(
     var uid : String = "",
     var title : String = "",
     var contents : String = "",
+    var favoriteCount : Int = 0,
     var timestamp : Long? = null
 )

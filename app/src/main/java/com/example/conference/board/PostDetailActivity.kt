@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ import com.example.conference.UserInfoDTO
 import com.example.conference.databinding.ActivityPostDetailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.activity_program_detail.*
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
@@ -50,6 +52,7 @@ class PostDetailActivity : AppCompatActivity() {
                     layoutManager = LinearLayoutManager(context)
                     adapter = postCommentAdapter
                     binding.postListCommentCountTv.text = postCommentAdapter.itemCount.toString()
+
                 }
                 binding.postDetailPb.visibility = View.GONE
             }
@@ -72,30 +75,34 @@ class PostDetailActivity : AppCompatActivity() {
         db.collection("user").document(user.currentUser?.uid!!).addSnapshotListener { value, error ->
             if (value == null) return@addSnapshotListener
             if (value.data != null) {
-                val map = value.data!!["favoritePost"] as HashMap<String, Boolean>
-                if (map[postId] == true) {
+                val map = value.data!!["favoritePost"] as Map<*, *>?
+                if (map?.get(postId) == true) {
                     if (!this.isFinishing) {
-                        Glide.with(this).load(R.drawable.ic_favorite_on).into(binding.postDetailFavoriteBtn)
+                        Glide.with(this).load(R.drawable.ic_star_on).into(binding.postDetailFavoriteBtn)
                     }
                 } else {
                     if (!this.isFinishing) {
-                        Glide.with(this).load(R.drawable.ic_favorite_off).into(binding.postDetailFavoriteBtn)
+                        Glide.with(this).load(R.drawable.ic_star_off).into(binding.postDetailFavoriteBtn)
                     }
                 }
             }
         }
     }
-
     private fun favoriteEvent() {
         val doc = db.collection("user").document(user.currentUser?.uid!!)
+        val postDoc = db.collection("post").document(postId.toString())
         db.runTransaction {
             val userInfoDTO = it.get(doc).toObject(UserInfoDTO::class.java)
+            val postInfoDTO = it.get(postDoc).toObject(BoardListDTO::class.java)
             if (userInfoDTO?.favoritePost?.containsKey(postId!!)!!) {
                 userInfoDTO.favoritePost.remove(postId!!)
+                postInfoDTO!!.favoriteCount--
             } else {
                 userInfoDTO.favoritePost[postId.toString()] = true
+                postInfoDTO!!.favoriteCount++
             }
             it.set(doc,userInfoDTO)
+            it.set(postDoc,postInfoDTO)
             return@runTransaction
         }
     }
@@ -108,6 +115,7 @@ class PostDetailActivity : AppCompatActivity() {
                 binding.postDetailNicknameTv.text = postInfo.nickname
                 binding.postDetailContentsTv.text = postInfo.contents
                 binding.postDetailTimestampTv.text = SimpleDateFormat("yyyy-MM-dd hh:mm").format(postInfo.timestamp)
+                binding.postListFavoriteCountTv.text = postInfo.favoriteCount.toString()
             }
         }
     }

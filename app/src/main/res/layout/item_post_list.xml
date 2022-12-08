@@ -69,10 +69,10 @@
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginRight="4dp"
-            app:srcCompat="@drawable/ic_favorite_off" />
+            app:srcCompat="@drawable/ic_star_on" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/post_list_favorite_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"

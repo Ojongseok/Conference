@@ -26,6 +26,21 @@
                 android:layout_marginRight="10dp">
 
 
+                <TextView
+                    android:id="@+id/post_detail_comment_zero_tv2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pd_comment_rv"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="아직 작성된 댓글이 없습니다. \n 첫 댓글을 작성해주세요 :)"
+                    android:textColor="@color/black1"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/post_detail_comment_rv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/post_detail_comment_rv" />
+
                 <RelativeLayout
                     android:id="@+id/program_detail_top_layout"
                     android:layout_width="match_parent"
@@ -193,11 +208,13 @@
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="20dp"
+                    android:layout_width="16dp"
                     android:layout_height="match_parent"
-                    android:layout_alignTop="@id/pd_comment_write_btn"
-                    android:layout_alignBottom="@id/pd_comment_write_btn"
+                    android:layout_alignTop="@+id/pd_comment_write_btn"
+                    android:layout_alignBottom="@+id/pd_comment_write_btn"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginBottom="2dp"
                     android:layout_toLeftOf="@id/pd_comment_write_btn"
                     app:srcCompat="@drawable/ic_comment" />
 
