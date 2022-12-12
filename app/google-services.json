@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:649819639768:android:71c80e8166e2d0b31b2cad",
         "android_client_info": {
-          "package_name": "com.example.conference"
+          "package_name": "com.Conference.conference"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "649819639768-3ht4j9500hkvm7jb5inn1grmpioquf61.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.conference",
+            "package_name": "com.Conference.conference",
             "certificate_hash": "7f5f7c3d8d36eb41d01e2717be0e9eb02b5b9e4c"
           }
         },

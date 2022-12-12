@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.conference">
+    package="com.Conference.conference">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -17,10 +17,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".board.PostDetailActivity"
+            android:name="com.Conference.conference.board.PostDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.Conference.conference.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GoogleLoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".home.ProgramDetailActivity" />
+        <activity android:name="com.Conference.conference.GoogleLoginActivity" />
+        <activity android:name="com.Conference.conference.MainActivity" />
+        <activity android:name="com.Conference.conference.home.ProgramDetailActivity" />
     </application>
 
 </manifest>
