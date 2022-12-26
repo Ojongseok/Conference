@@ -66,10 +66,9 @@ class GoogleLoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.w("LoginActivity", "firebaseAuthWithGoogle 성공", task.exception)
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, AgreeActivity::class.java))
                     Toast.makeText(this,"구글 로그인에 성공했습니다.",Toast.LENGTH_SHORT).show()
                     finish()
-
                 } else {
                     Log.w("LoginActivity", "firebaseAuthWithGoogle 실패", task.exception)
                     Toast.makeText(this,"구글 로그인 실패",Toast.LENGTH_SHORT).show()
